@@ -2,7 +2,7 @@
 import hashlib, imp, os, sqlite3, sys
 
 # Load the openshift helper library
-lib_path      = os.environ['OPENSHIFT_REPO_DIR'] + 'wsgi/openshift/'
+lib_path      = os.environ['OPENSHIFT_REPO_DIR'] + 'wsgi/myproject/'
 modinfo       = imp.find_module('openshiftlibs', [lib_path])
 openshiftlibs = imp.load_module('openshiftlibs', modinfo[0], modinfo[1], modinfo[2])
 
@@ -35,7 +35,7 @@ conn.close()
 
 # Update the user admin password
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'openshift'))
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject'))
 from django.contrib.auth.models import User
 usr = User.objects.get(username__exact='admin')
 usr.set_password(new_pass)
