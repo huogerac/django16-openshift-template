@@ -1,20 +1,13 @@
 from setuptools import setup
 
-import os
-
 # Put here required packages
-packages = ['Django<=1.6',]
+packages = ['Django==1.6.6', ]
 
-if 'REDISCLOUD_URL' in os.environ and 'REDISCLOUD_PORT' in os.environ and 'REDISCLOUD_PASSWORD' in os.environ:
-     packages.append('django-redis-cache')
-     packages.append('hiredis')
-
-setup(name='YourAppName',
+setup(name='myproject',
       version='1.0',
       description='OpenShift App',
-      author='Your Name',
-      author_email='example@example.com',
+      author='Roger Camargo',
+      author_email='huogeac@gmail.com',
       url='https://pypi.python.org/pypi',
       install_requires=packages,
-)
-
+      )
