@@ -13,7 +13,7 @@ import imp
 
 ON_OPENSHIFT = False
 if os.environ.has_key('OPENSHIFT_REPO_DIR'):
-     ON_OPENSHIFT = True
+    ON_OPENSHIFT = True
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -26,24 +26,24 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%hw' }
 use_keys = default_keys
 if ON_OPENSHIFT:
-     imp.find_module('openshiftlibs')
-     import openshiftlibs
-     use_keys = openshiftlibs.openshift_secure(default_keys)
+    imp.find_module('openshiftlibs')
+    import openshiftlibs
+    use_keys = openshiftlibs.openshift_secure(default_keys)
 
 SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-     DEBUG = False
+    DEBUG = False
 else:
-     DEBUG = True
+    DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
-     ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = []
 else:
-     ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,41 +72,41 @@ if 'REDISCLOUD_URL' in os.environ and 'REDISCLOUD_PORT' in os.environ and 'REDIS
     redis_port = os.environ['REDISCLOUD_PORT']
     redis_password = os.environ['REDISCLOUD_PASSWORD']
     CACHES = {
-        'default' : {
-            'BACKEND' : 'redis_cache.RedisCache',
-            'LOCATION' : '%s:%d'%(redis_server,int(redis_port)),
-            'OPTIONS' : {
-                'DB':0,
-                'PARSER_CLASS' : 'redis.connection.HiredisParser',
-                'PASSWORD' : redis_password,
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '%s:%d' % (redis_server, int(redis_port)),
+            'OPTIONS': {
+                'DB': 0,
+                'PARSER_CLASS': 'redis.connection.HiredisParser',
+                'PASSWORD': redis_password,
             }
         }
     }
     MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'myproject.urls'
 
 WSGI_APPLICATION = 'wsgi.application'
 
 TEMPLATE_DIRS = (
-     os.path.join(BASE_DIR,'templates'),
+    os.path.join(BASE_DIR,'templates'),
 )
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 if ON_OPENSHIFT:
-     DATABASES = {
-         'default': {
-             'ENGINE': 'django.db.backends.sqlite3',
-             'NAME': os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
-         }
-     }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
+        }
+    }
 else:
-     DATABASES = {
-         'default': {
-             'ENGINE': 'django.db.backends.sqlite3',
-             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-         }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
 
 # Internationalization
