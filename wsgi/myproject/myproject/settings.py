@@ -7,15 +7,28 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+# Build paths inside the project like this: os.join(BASE_DIR, ...)
+#import os
 import imp
 
-ON_OPENSHIFT = False
-if os.environ.has_key('OPENSHIFT_REPO_DIR'):
-    ON_OPENSHIFT = True
+from os import environ
+from os.path import basename, dirname, join, normpath
+from sys import path
 
-BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+# Build paths inside the project like this: os.join(BASE_DIR, ...)
+# Absolute filesystem path to the Django project directory:
+BASE_DIR = dirname(dirname(__file__))
+
+# Absolute filesystem path to the top-level project folder:
+SITE_ROOT = dirname(BASE_DIR)
+
+SITE_NAME = basename(BASE_DIR)
+
+path.append(BASE_DIR)
+
+ON_OPENSHIFT = False
+if environ.has_key('OPENSHIFT_REPO_DIR'):
+    ON_OPENSHIFT = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -45,6 +58,25 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['*']
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+MEDIA_ROOT = normpath(join(SITE_ROOT, 'media'))
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    normpath(join(SITE_ROOT, 'static')),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -67,10 +99,10 @@ MIDDLEWARE_CLASSES = (
 )
 
 # If you want configure the REDISCLOUD
-if 'REDISCLOUD_URL' in os.environ and 'REDISCLOUD_PORT' in os.environ and 'REDISCLOUD_PASSWORD' in os.environ:
-    redis_server = os.environ['REDISCLOUD_URL']
-    redis_port = os.environ['REDISCLOUD_PORT']
-    redis_password = os.environ['REDISCLOUD_PASSWORD']
+if 'REDISCLOUD_URL' in environ and 'REDISCLOUD_PORT' in environ and 'REDISCLOUD_PASSWORD' in environ:
+    redis_server = environ['REDISCLOUD_URL']
+    redis_port = environ['REDISCLOUD_PORT']
+    redis_password = environ['REDISCLOUD_PASSWORD']
     CACHES = {
         'default': {
             'BACKEND': 'redis_cache.RedisCache',
@@ -89,7 +121,7 @@ ROOT_URLCONF = 'myproject.urls'
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,'templates'),
+    join(BASE_DIR,'templates'),
 )
 
 # Database
@@ -98,14 +130,14 @@ if ON_OPENSHIFT:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
+            'NAME': join(environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
         }
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': join(BASE_DIR, 'db.sqlite3'),
         }
     }
 
@@ -121,9 +153,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
-STATIC_URL = '/static/'

@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>{% block title %}Site Title{% endblock %}</title>
+
+      {% block css %}
+
+      <!-- Custom and Common CSS -->
+      <link href="{% static 'core/css/base.css' %}" rel="stylesheet" media="screen">     
+
+      {% endblock css %}
+
+      <!--  USE THE extracss BLOCK to add CSS here -->
+      {% block extracss %}
+      {% endblock extracss %}
+        
+      <!--  USE THE extrajs_top BLOCK to add javascripts here -->
+      {% block extrajs_top %}
+      {% endblock %}
+        
+    </head>
+    
+    <!--  USE THE body BLOCK to override all the body -->
+    {% block body %}
+	    <body id="top">
+
+        <!--  USE THE extrabody_top BLOCK to add content here -->
+        {% block extrabody_top %}
+        {% endblock extrabody_top %}
+
+        <!--  USE THE topheader_area BLOCK to add content here -->
+        {% block topheader_area %}
+        {% endblock topheader_area %}
+
+        <!--  USE THE navbar_area BLOCK to add content here -->
+        {% block navbar_area %}
+        {% endblock navbar_area %}
+
+        <!--  USE THE header_area BLOCK to add content here -->
+        {% block header_area %}    
+        {% endblock header_area %}
+
+        <!--  USE THE content_area BLOCK to add the MAIN CONTENT -->
+        {% block content_area %}
+
+          <!--  USE THE slide_area BLOCK to add content here -->
+          {% block slide_area %}
+          {% endblock slide_area %}
+
+          <!--  OR USE THE content BLOCK DIRECTLY -->
+          {% block content %}
+          {% endblock %}
+
+        {% endblock %}
+
+    		<!--  USE THE extra_content_area BLOCK to add content here -->
+    		{% block extra_content_area %}			
+    		{% endblock %}    
+
+        <!--  USE THE footer_area BLOCK to add content here -->
+        {% block footer_area %}
+
+            <!--  USE THE footer_top BLOCK to add content here -->
+            {% block footer_top %}
+            {% endblock %}
+
+            <!--  USE THE footer_socialmedia BLOCK to add content here -->
+            {% block footer_socialmedia %}
+            {% endblock footer_socialmedia %}            
+
+            <!--  USE THE footer BLOCK to add content here -->
+            {% block footer %}
+            {% endblock footer %}  
+
+        {% endblock footer_area %}
+
+        <!--  USE THE extrabody_bottom BLOCK to add content here -->
+        {% block extrabody_bottom %}
+        {% endblock extrabody_bottom %}
+
+        <!-- Basic JS for this template::: SYDNEY -->
+        {% block js %}
+
+          <!-- 3rd JS frameworks imported from bower -->
+
+          <!-- Custom and Common JS -->
+
+        {% endblock js %}
+
+        <!--  USE THE extrajs_bottom BLOCK to add extra javascripts here -->
+        {% block extrajs_bottom %}
+        {% endblock %}        
+
+      </body>
+    {% endblock body %}
+
+</html>
