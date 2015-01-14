@@ -3,4 +3,4 @@
 import myproject.myproject.wsgi
 
 # reuse the application callable from myproject.wsgi
-application = myproject.wsgi.application
+application = myproject.myproject.wsgi.application
