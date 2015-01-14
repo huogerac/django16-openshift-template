@@ -34,7 +34,7 @@ c.close()
 conn.close()
 
 # Update the user admin password
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
 sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject'))
 from django.contrib.auth.models import User
 usr = User.objects.get(username__exact='admin')

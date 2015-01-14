@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 import os
 import sys
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
 
 if os.environ.has_key('OPENSHIFT_REPO_DIR'):
     sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject'))
-    sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject', 'myproject'))
+    #sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject', 'myproject'))
     virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
     os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.7/site-packages')
     virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
