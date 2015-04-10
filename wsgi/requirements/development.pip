@@ -1,0 +1,5 @@
+-r base.pip
+
+ipython==2.2.0
+ipdb==0.8
+Werkzeug==0.9.6

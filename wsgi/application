@@ -6,7 +6,7 @@ This file is the wsgi.py for openshift
 import os
 import sys
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings.openshift")
 
 sys.path.append(
     os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'myproject'))

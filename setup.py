@@ -1,6 +1,7 @@
 from setuptools import setup
 
-# Put here required packages
+# Put here main required packages
+# additional packages, see /wsgi/requirements/base.pip
 packages = ['Django==1.6.6', ]
 
 setup(name='myproject',
