@@ -10,14 +10,6 @@ Features
 - Multiple settings (development, openshift ...)
 
 
-Do not forget to turn this environment variable off and fully restart
-the application when you finish:
-
-```
-$ rhc env unset DEBUG
-$ rhc app stop && rhc app start
-```
-
 Running on OpenShift
 --------------------
 
@@ -28,7 +20,7 @@ Running on OpenShift
 - Set the source code to ```https://github.com/huogerac/django16-openshift-template.git```
 	instead of ```https://github.com/openshift/django-example.git```
 - Set python-2.7
-- You should access it at http://yourapplication-$yournamespace.rhcloud.com
+- You should access it at ```http://yourapplication-$yournamespace.rhcloud.com```
 
 
 Pushing your code to another Git repository
@@ -38,3 +30,11 @@ Use the Git command:
     git remote add myalias git://github.com/myaccount/myproject.git
     git push myalias master
 
+
+TODO
+----
+- Test the media files
+- Add database support (and maybe south for Django 1.6)
+- Add bower to get static files
+- Find a way to rename the ```myproject``` to the correct project name
+- Add support for Django 1.7
