@@ -4,6 +4,11 @@ Django on OpenShift
 This git repository helps you get up and running quickly with a Django
 installation on OpenShift.  
 
+WHY?
+--------------------
+The main reason is creating a structure that runs over the openshift, however, its could run anywhere else easily. Indeed, the focus is follow django standards.
+
+
 Features
 --------------------
 - Static files working
@@ -38,3 +43,4 @@ TODO
 - Add bower to get static files
 - Find a way to rename the ```myproject``` to the correct project name
 - Add support for Django 1.7
+- Create a how to for creating a project from scratch and using GitHub as source repository
